@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace LogingInApp
 {
-    public partial class Address : UserControl
+    public partial class AddressControl : UserControl
     {
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public int CountryId { get; set; }
         public int PostCode { get; set; }
-        public Address()
+        private bool nonNumber = false;
+
+        public AddressControl()
         {
             InitializeComponent();
         }
@@ -40,16 +42,41 @@ namespace LogingInApp
             this.City = txtCity.Text;
         }
 
-        private void txtPostalCode_TextChanged(object sender, EventArgs e)
-        {
-            this.PostCode = int.Parse(txtPostalCode.Text);
-        }
 
         private void dropDownCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox combo = (ComboBox)sender;
             var selectedItem = combo.SelectedItem as Country;
             this.CountryId = selectedItem.ID;
+        }
+
+        private void txtPostalCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (nonNumber)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtPostalCode_MouseLeave(object sender, EventArgs e)
+        {
+            if (txtPostalCode.Text != "")
+            {
+                this.PostCode = int.Parse(txtPostalCode.Text);
+            }
+        }
+
+        private void txtPostalCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            nonNumber = false;
+            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    nonNumber = true;
+                }
+            }
+            
         }
     }
 }

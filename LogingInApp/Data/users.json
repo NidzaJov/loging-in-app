@@ -1,0 +1,90 @@
+[
+  {
+    "ID": 1,
+    "Name": "Darko",
+    "Email": "jeki@seadc.com",
+    "Age": 13,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 2,
+    "Name": "Marko",
+    "Email": "jeki@seadc.com",
+    "Age": 13,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 3,
+    "Name": "Janko",
+    "Email": "jeki@seadc.com",
+    "Age": 21,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 4,
+    "Name": "Zarko",
+    "Email": "jeki@seadc.com",
+    "Age": 18,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 5,
+    "Name": "Zdravko",
+    "Email": "jeki@seadc.com",
+    "Age": 18,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 6,
+    "Name": "Slavko",
+    "Email": "jeki@seadc.com",
+    "Age": 20,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 7,
+    "Name": "Batko",
+    "Email": "jeki@seadc.com",
+    "Age": 20,
+    "RoleId": 0,
+    "AddressId": 1
+  },
+  {
+    "ID": 8,
+    "Name": "Joca",
+    "Email": "joca@sedc.com",
+    "Age": 0,
+    "RoleId": 0,
+    "AddressId": 23
+  },
+  {
+    "ID": 9,
+    "Name": "Joca",
+    "Email": "joca@sedc.com",
+    "Age": 0,
+    "RoleId": 0,
+    "AddressId": 24
+  },
+  {
+    "ID": 10,
+    "Name": "Joca",
+    "Email": "joca@sedc.com",
+    "Age": 0,
+    "RoleId": 0,
+    "AddressId": 25
+  },
+  {
+    "ID": 11,
+    "Name": "Moca",
+    "Email": "moca@sedc.com",
+    "Age": 0,
+    "RoleId": 0,
+    "AddressId": 26
+  }
+]

@@ -31,7 +31,7 @@ namespace LogingInApp
         {
             this.listViewStudents = new System.Windows.Forms.ListView();
             this.btnLogOut = new System.Windows.Forms.Button();
-            this.ctlAddress = new LogingInApp.Address();
+            this.ctlAddress = new AddressControl();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -97,7 +97,7 @@ namespace LogingInApp
 
         private System.Windows.Forms.ListView listViewStudents;
         private System.Windows.Forms.Button btnLogOut;
-        private Address ctlAddress;
+        private AddressControl ctlAddress;
         private System.Windows.Forms.Button btnSubmit;
     }
 }

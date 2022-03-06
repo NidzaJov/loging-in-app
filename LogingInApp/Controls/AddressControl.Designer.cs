@@ -1,7 +1,7 @@
 ﻿
 namespace LogingInApp
 {
-    partial class Address
+    partial class AddressControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -106,9 +106,11 @@ namespace LogingInApp
             this.txtPostalCode.Name = "txtPostalCode";
             this.txtPostalCode.Size = new System.Drawing.Size(100, 22);
             this.txtPostalCode.TabIndex = 7;
-            this.txtPostalCode.TextChanged += new System.EventHandler(this.txtPostalCode_TextChanged);
+            this.txtPostalCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPostalCode_KeyDown);
+            this.txtPostalCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPostalCode_KeyPress);
+            this.txtPostalCode.MouseLeave += new System.EventHandler(this.txtPostalCode_MouseLeave);
             // 
-            // Address
+            // AddressControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -120,7 +122,7 @@ namespace LogingInApp
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblChooseCountry);
             this.Controls.Add(this.dropDownCountry);
-            this.Name = "Address";
+            this.Name = "AddressControl";
             this.Size = new System.Drawing.Size(263, 215);
             this.Load += new System.EventHandler(this.Address_Load);
             this.ResumeLayout(false);

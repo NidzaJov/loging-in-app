@@ -1,0 +1,184 @@
+[
+  {
+    "ID": 1,
+    "StreetAddress": null,
+    "City": "Nis",
+    "CountryId": 0,
+    "PostCode": 18000
+  },
+  {
+    "ID": 2,
+    "StreetAddress": null,
+    "City": "Nis",
+    "CountryId": 1,
+    "PostCode": 18000
+  },
+  {
+    "ID": 3,
+    "StreetAddress": "m g 6",
+    "City": "skopje",
+    "CountryId": 2,
+    "PostCode": 1000
+  },
+  {
+    "ID": 4,
+    "StreetAddress": "m g 6",
+    "City": "skopje",
+    "CountryId": 2,
+    "PostCode": 1000
+  },
+  {
+    "ID": 5,
+    "StreetAddress": "m g 6",
+    "City": "skopje",
+    "CountryId": 2,
+    "PostCode": 1000
+  },
+  {
+    "ID": 6,
+    "StreetAddress": "m g 6",
+    "City": "skopje",
+    "CountryId": 2,
+    "PostCode": 1000
+  },
+  {
+    "ID": 7,
+    "StreetAddress": "m g 6",
+    "City": "ni",
+    "CountryId": 1,
+    "PostCode": 18000
+  },
+  {
+    "ID": 8,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 9,
+    "StreetAddress": "m g 6",
+    "City": "ni",
+    "CountryId": 1,
+    "PostCode": 18000
+  },
+  {
+    "ID": 10,
+    "StreetAddress": "q",
+    "City": "q",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 11,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 12,
+    "StreetAddress": "q",
+    "City": "q",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 13,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 14,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 15,
+    "StreetAddress": "a",
+    "City": "s",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 16,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 17,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 18,
+    "StreetAddress": null,
+    "City": null,
+    "CountryId": 1,
+    "PostCode": 0
+  },
+  {
+    "ID": 19,
+    "StreetAddress": null,
+    "City": null,
+    "CountryId": 1,
+    "PostCode": 111111112
+  },
+  {
+    "ID": 20,
+    "StreetAddress": "AC",
+    "City": "AC",
+    "CountryId": 1,
+    "PostCode": 0
+  },
+  {
+    "ID": 21,
+    "StreetAddress": "q",
+    "City": "q",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 22,
+    "StreetAddress": "a",
+    "City": "a",
+    "CountryId": 1,
+    "PostCode": 1
+  },
+  {
+    "ID": 23,
+    "StreetAddress": "Lokalna",
+    "City": "Nis",
+    "CountryId": 18000,
+    "PostCode": 1
+  },
+  {
+    "ID": 24,
+    "StreetAddress": "Lok",
+    "City": "Nis",
+    "CountryId": 18000,
+    "PostCode": 1
+  },
+  {
+    "ID": 25,
+    "StreetAddress": "bkl",
+    "City": "ni",
+    "CountryId": 12,
+    "PostCode": 1
+  },
+  {
+    "ID": 26,
+    "StreetAddress": "Akacije",
+    "City": "Leskovac",
+    "CountryId": 11000,
+    "PostCode": 1
+  }
+]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogingInApp.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,18 +13,22 @@ namespace LogingInApp
 {
     public partial class formMain : Form
     {
-        private Address _address;
+        private AddressControl _address;
         public formMain()
         {
             InitializeComponent();
+            _address = ctlAddress;
         }
 
         private void formMain_Load(object sender, EventArgs e)
         {
-            Student student = new Student();
-            var studentList = student.GetStudents();
-            populateList(studentList);
+            User user = new User();
+            var userList = user.GetUserList();
+            populateList(userList);
             this.listViewStudents.ColumnClick += new ColumnClickEventHandler(onColumnClick);
+
+            ColumnClickEventArgs eArgs = new ColumnClickEventArgs(0);
+            onColumnClick(listViewStudents, eArgs);
         }
 
         private void onColumnClick(object sender, ColumnClickEventArgs e)
@@ -31,7 +36,7 @@ namespace LogingInApp
             this.listViewStudents.ListViewItemSorter = new ListViewItemComparer(e.Column);
         }
 
-        private void populateList(IList<Student> studentList)
+        private void populateList(IList<User> studentList)
         {
             listViewStudents.View = View.Details;
 
@@ -66,7 +71,21 @@ namespace LogingInApp
             }
             public int Compare(object x, object y)
             {
-                return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                int nr = 0;
+                bool isNumber = int.TryParse(((ListViewItem)x).SubItems[col].Text, out nr);
+
+                if (!isNumber)
+                {
+                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                }
+                else
+                {
+                    int firstNumber = int.Parse(((ListViewItem)x).SubItems[col].Text);
+                    int secondNumber = int.Parse(((ListViewItem)x).SubItems[col].Text);
+
+                    return firstNumber.CompareTo(secondNumber);
+                }
+                
             }
         }
 
@@ -90,10 +109,30 @@ namespace LogingInApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            Address a = new Address();
+            User u = new User();
             string streetAddress = ctlAddress.StreetAddress;
             string city = ctlAddress.City;
             int postCode = ctlAddress.PostCode;
-            int CountryId = ctlAddress.CountryId;
+            int countryId = ctlAddress.CountryId;
+
+            int addressId = a.SaveAddress(streetAddress, city, postCode, countryId);
+
+            u.SaveUser("Moca", "moca@sedc.com", 29, 0, addressId);
+            _address.StreetAddress = "";
+            _address.City = "";
+            var txtPostcode = _address.Controls.Find("txtPostalCode", true);
+            if (txtPostcode != null)
+            {
+                TextBox tb = txtPostcode[0] as TextBox;
+                tb.Clear();
+            }
+            _address.CountryId = 1;
+
+            listViewStudents.Clear();
+            this.populateList(u.GetUserList());
+ 
+
             int[] students = new int[listViewStudents.SelectedItems.Count];
             int i = 0;
             foreach (ListViewItem item in listViewStudents.SelectedItems)
