@@ -50,15 +50,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Address.cs" />
+    <Compile Include="Classes\ListViewItemComparer.cs" />
     <Compile Include="Classes\Role.cs" />
     <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\Country.cs" />
     <Compile Include="Controls\AddressControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\AddressControl.Designer.cs">
       <DependentUpon>AddressControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Country.cs" />
+    <Compile Include="Forms\frmAddressEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAddressEditor.Designer.cs">
+      <DependentUpon>frmAddressEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\formLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\formMain.resx">
       <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAddressEditor.resx">
+      <DependentUpon>frmAddressEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,5 +118,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,7 +19,7 @@ namespace LogingInApp.Classes
         [JsonIgnore]
         public IList<User> AllUsers { get; set; }
 
-        private const string _path = @"C:\Users\Nikola\Desktop\LogingInApp\LogingInApp\Data\users.json";
+        private const string _path = @"C:\Users\Nikola\Desktop\loging-in-app\LogingInApp\Data\users.json";
 
         public User()
         {
@@ -31,6 +31,7 @@ namespace LogingInApp.Classes
             ID = iD;
             Name = name;
             Email = email;
+            Age = age;
             RoleId = roleId;
             AddressId = addressId;
         }
@@ -60,8 +61,60 @@ namespace LogingInApp.Classes
             }
         }
 
+        public bool DeleteUser(int id)
+        {
+            var list = new List<User>();
+            if (File.Exists(_path))
+            {
+                string json = File.ReadAllText(_path);
+                list = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+
+            try
+            {
+                var index = list.FindIndex(x => x.ID == id);
+                list.RemoveAt(index);
+
+                string serializedJson = JsonConvert.SerializeObject(list, Formatting.Indented);
+                File.WriteAllText(_path, serializedJson);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool EditUser(int id, User user)
+        {
+            var list = new List<User>();
+            if (File.Exists(_path))
+            {
+                string json = File.ReadAllText(_path);
+                list = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+
+            try
+            {
+                var index = list.FindIndex(x => x.ID == id);
+                list.RemoveAt(index);
+                list.Insert(index, user);
+
+                string serializedJson = JsonConvert.SerializeObject(list, Formatting.Indented);
+                File.WriteAllText(_path, serializedJson);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public User GetUser(int userId)
         {
+            if (AllUsers == null) _getAllUsers();
             var user = AllUsers.Where(x => x.ID == userId).FirstOrDefault();
             return user;
         }

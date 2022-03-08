@@ -18,7 +18,7 @@ namespace LogingInApp.Classes
         [JsonIgnore]
         public IList<Address> AllAddresses { get; set; }
 
-        private const string _path = @"C:\Users\Nikola\Desktop\LogingInApp\LogingInApp\Data\addresses.json";
+        private const string _path = @"C:\Users\Nikola\Desktop\loging-in-app\LogingInApp\Data\addresses.json";
 
         public Address()
         {
@@ -58,6 +58,13 @@ namespace LogingInApp.Classes
             {
                 return 0;
             }
+        }
+
+        public Address GetAddress(int addressId)
+        {
+            if (AllAddresses == null) _getAllAddresses();
+            var address = AllAddresses.Where(x => x.ID == addressId).FirstOrDefault();
+            return address;
         }
 
         public IList<Address> FilterAddress(string _adress)

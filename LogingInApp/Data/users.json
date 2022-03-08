@@ -50,8 +50,8 @@
   {
     "ID": 7,
     "Name": "Batko",
-    "Email": "jeki@seadc.com",
-    "Age": 20,
+    "Email": "batko@seadc.com",
+    "Age": 25,
     "RoleId": 0,
     "AddressId": 1
   },
@@ -70,14 +70,6 @@
     "Age": 0,
     "RoleId": 0,
     "AddressId": 24
-  },
-  {
-    "ID": 10,
-    "Name": "Joca",
-    "Email": "joca@sedc.com",
-    "Age": 0,
-    "RoleId": 0,
-    "AddressId": 25
   },
   {
     "ID": 11,

@@ -1,4 +1,6 @@
 ﻿using LogingInApp.Classes;
+using LogingInApp.Controls;
+using LogingInApp.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,22 +15,24 @@ namespace LogingInApp
 {
     public partial class formMain : Form
     {
+        private bool isEdit = false;
+        private User editedUser = null;
         private AddressControl _address;
         public formMain()
         {
             InitializeComponent();
-            _address = ctlAddress;
+            _address = addressControl1;
         }
-
         private void formMain_Load(object sender, EventArgs e)
         {
             User user = new User();
             var userList = user.GetUserList();
             populateList(userList);
-            this.listViewStudents.ColumnClick += new ColumnClickEventHandler(onColumnClick);
 
+            this.listViewStudents.ColumnClick += new ColumnClickEventHandler(onColumnClick);
             ColumnClickEventArgs eArgs = new ColumnClickEventArgs(0);
             onColumnClick(listViewStudents, eArgs);
+            this.listViewStudents.MouseClick += listViewStudents_OnMouseClick;
         }
 
         private void onColumnClick(object sender, ColumnClickEventArgs e)
@@ -42,12 +46,13 @@ namespace LogingInApp
 
             listViewStudents.Columns.Add("ID");
             listViewStudents.Columns.Add("Name");
+            listViewStudents.Columns.Add("Email");
             listViewStudents.Columns.Add("Age");
 
             foreach (var student in studentList)
             {
                 ListViewItem item = new ListViewItem(
-                    new string[] { student.ID.ToString(), student.Name.ToString(), student.Age.ToString() }
+                    new string[] { student.ID.ToString(), student.Name.ToString(), student.Email.ToString(), student.Age.ToString() }
                 );
                 listViewStudents.Items.Add(item);
             }
@@ -57,38 +62,117 @@ namespace LogingInApp
             listViewStudents.FullRowSelect = true;
         }
 
-        private class ListViewItemComparer : System.Collections.IComparer
+        private void populateForm(ListViewItem item)
         {
-            private int col;
-            public ListViewItemComparer()
+            User u = new User();
+            txtName.Text = item.SubItems[1].Text;
+            txtEmail.Text = item.SubItems[2].Text;
+            txtID.Text = item.SubItems[0].Text;
+            txtAge.Text = item.SubItems[3].Text;
+
+            int id = int.Parse(item.SubItems[0].Text);
+            var user = u.GetUser(id);
+            user.Name = item.SubItems[1].Text;
+            user.Email = item.SubItems[2].Text;
+            user.Age = int.Parse(item.SubItems[3].Text);
+
+            editedUser = user;
+        }
+        private void clearFields()
+        {
+            txtName.Text = "";
+            txtEmail.Text = "";
+            txtAge.Text = "";
+
+            var txtStreetAddress = _address.Controls.Find("txtStreetAddress", true);
+            if (txtStreetAddress != null)
             {
-                col = 0;
+                TextBox tb = txtStreetAddress[0] as TextBox;
+                tb.Clear();
             }
 
-            public ListViewItemComparer(int column)
+            var txtCity = _address.Controls.Find("txtCity", true);
+            if (txtCity != null)
             {
-                col = column;
+                TextBox tb = txtCity[0] as TextBox;
+                tb.Clear();
             }
-            public int Compare(object x, object y)
+            _address.City = "";
+
+            var txtPostCode = _address.Controls.Find("txtPostCode", true);
+            if (txtPostCode != null)
             {
-                int nr = 0;
-                bool isNumber = int.TryParse(((ListViewItem)x).SubItems[col].Text, out nr);
+                TextBox tb = txtPostCode[0] as TextBox;
+                tb.Clear();
+            }
+            _address.CountryId = 1;
+        }
 
-                if (!isNumber)
+        private void listViewStudents_OnMouseClick(object sender, MouseEventArgs e)
+        {
+            if ( e.Button == MouseButtons.Right && listViewStudents.FocusedItem != null &&
+                listViewStudents.FocusedItem.Bounds.Contains(e.Location))
+            {
+                ContextMenu m = new ContextMenu();
+                MenuItem editMenuItem = new MenuItem("Edit");
+                editMenuItem.Click += delegate (object sender2, EventArgs e2)
                 {
-                    return String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
-                }
-                else
-                {
-                    int firstNumber = int.Parse(((ListViewItem)x).SubItems[col].Text);
-                    int secondNumber = int.Parse(((ListViewItem)x).SubItems[col].Text);
+                    EditClick(sender, e, listViewStudents.FocusedItem);
+                };
+                m.MenuItems.Add(editMenuItem);
 
-                    return firstNumber.CompareTo(secondNumber);
-                }
-                
+                MenuItem editAddressItem = new MenuItem("Edit address");
+                editAddressItem.Click += delegate (object sender3, EventArgs e3)
+                {
+                    EditAddressClick(sender, e, listViewStudents.FocusedItem);
+                };
+                m.MenuItems.Add(editAddressItem);
+
+                MenuItem separatorMenuItem = new MenuItem("-");
+                m.MenuItems.Add(separatorMenuItem);
+
+                MenuItem deleteMenuItem = new MenuItem("Delete");
+                deleteMenuItem.Click += delegate (object sender2, EventArgs e2)
+                {
+                    DeleteClick(sender, e, listViewStudents.FocusedItem);
+                };
+                m.MenuItems.Add(deleteMenuItem);
+
+                m.Show(listViewStudents, new Point(e.X, e.Y));
             }
         }
 
+        private void DeleteClick(Object sender, MouseEventArgs e, ListViewItem item)
+        {
+            int id = int.Parse(item.Text);
+            User user = new User();
+            bool isDeleted = user.DeleteUser(id);
+
+            if (isDeleted)
+            {
+                this.Refresh();
+                listViewStudents.Clear();
+                populateList(user.GetUserList());
+            } else
+            {
+                MessageBox.Show("Error deleting user");
+            }
+        }
+
+        private void EditClick(object sender, MouseEventArgs e, ListViewItem item)
+        {
+            isEdit = true;
+            populateForm(item);
+        }
+
+        private void EditAddressClick(object sender, MouseEventArgs e, ListViewItem focusedItem)
+        {
+            int id = int.Parse(focusedItem.Text);
+            User user = new User();
+            var u = user.GetUser(id);
+            frmAddressEditor fm = new frmAddressEditor(u.AddressId);
+            fm.Show();
+        }
         private void formMain_OnClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
@@ -101,48 +185,58 @@ namespace LogingInApp
             fl.Show();
         }
 
-        private void listViewStudents_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            MessageBox.Show($"This is ID: {_address.CountryId}");
-            this.Close();
-        }
-
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             Address a = new Address();
             User u = new User();
-            string streetAddress = ctlAddress.StreetAddress;
-            string city = ctlAddress.City;
-            int postCode = ctlAddress.PostCode;
-            int countryId = ctlAddress.CountryId;
+            _address = this.addressControl1;
+            _address.OnChildTextChanged += new EventHandler(child_OnChildTextChanged);
 
-            int addressId = a.SaveAddress(streetAddress, city, postCode, countryId);
-
-            u.SaveUser("Moca", "moca@sedc.com", 29, 0, addressId);
-            _address.StreetAddress = "";
-            _address.City = "";
-            var txtPostcode = _address.Controls.Find("txtPostalCode", true);
-            if (txtPostcode != null)
+            if (isEdit && editedUser != null)
             {
-                TextBox tb = txtPostcode[0] as TextBox;
-                tb.Clear();
-            }
-            _address.CountryId = 1;
+                editedUser.Name = txtName.Text;
+                editedUser.Email = txtEmail.Text;
+                editedUser.Age = Int32.Parse(txtAge.Text);
+                bool isSuccessfull = u.EditUser(editedUser.ID, editedUser);
 
-            listViewStudents.Clear();
-            this.populateList(u.GetUserList());
- 
-
-            int[] students = new int[listViewStudents.SelectedItems.Count];
-            int i = 0;
-            foreach (ListViewItem item in listViewStudents.SelectedItems)
+                if(isSuccessfull)
+                {
+                    listViewStudents.Items.Clear();
+                    this.populateList(u.GetUserList());
+                    editedUser = null;
+                    isEdit = false;
+                }
+            } else
             {
-                var id = item.Text;
-                var name = item.SubItems[1].Text;
-                var age = item.SubItems[2].Text;
-                students[i] = int.Parse(id);
-                i++;
+                string streetAddress = _address.StreetAddress;
+                string city = _address.City;
+                int postCode = _address.PostCode;
+                int countryId = _address.CountryId;
+
+                int addressId = a.SaveAddress(streetAddress, city, postCode, countryId);
+
+                u.SaveUser(txtName.Text, txtEmail.Text, int.Parse(txtAge.Text), 0,  addressId);
+                clearFields();
+                listViewStudents.Items.Clear();
+                this.populateList(u.GetUserList());
+                /*
+                int[] students = new int[listViewStudents.SelectedItems.Count];
+                int i = 0;
+                foreach (ListViewItem item in listViewStudents.SelectedItems)
+                {
+                    var id = item.Text;
+                    var name = item.SubItems[1].Text;
+                    var age = item.SubItems[2].Text;
+                    students[i] = int.Parse(id);
+                    i++;
+                }
+                */
             }
         }
+        void child_OnChildTextChanged(object sender, EventArgs e)
+        {
+
+        }
+            
     }
 }

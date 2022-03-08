@@ -1,7 +1,7 @@
 [
   {
     "ID": 1,
-    "StreetAddress": null,
+    "StreetAddress": "Dusanova 33",
     "City": "Nis",
     "CountryId": 0,
     "PostCode": 18000
@@ -179,6 +179,27 @@
     "StreetAddress": "Akacije",
     "City": "Leskovac",
     "CountryId": 11000,
+    "PostCode": 1
+  },
+  {
+    "ID": 27,
+    "StreetAddress": null,
+    "City": null,
+    "CountryId": 0,
+    "PostCode": 1
+  },
+  {
+    "ID": 28,
+    "StreetAddress": null,
+    "City": null,
+    "CountryId": 0,
+    "PostCode": 1
+  },
+  {
+    "ID": 29,
+    "StreetAddress": null,
+    "City": null,
+    "CountryId": 0,
     "PostCode": 1
   }
 ]
