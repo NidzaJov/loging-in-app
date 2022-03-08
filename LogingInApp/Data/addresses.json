@@ -1,10 +1,17 @@
 [
   {
+    "ID": 0,
+    "StreetAddress": "Bagremova",
+    "City": "Skopje",
+    "CountryId": 1,
+    "PostCode": 22000
+  },
+  {
     "ID": 1,
-    "StreetAddress": "Dusanova 33",
-    "City": "Nis",
+    "StreetAddress": "Miljacka 63",
+    "City": "Sarajevo",
     "CountryId": 0,
-    "PostCode": 18000
+    "PostCode": 14000
   },
   {
     "ID": 2,
@@ -155,51 +162,23 @@
   },
   {
     "ID": 23,
-    "StreetAddress": "Lokalna",
-    "City": "Nis",
-    "CountryId": 18000,
-    "PostCode": 1
+    "StreetAddress": "m g 6",
+    "City": "tesaloniki",
+    "CountryId": 3,
+    "PostCode": 456
   },
   {
     "ID": 24,
-    "StreetAddress": "Lok",
-    "City": "Nis",
-    "CountryId": 18000,
-    "PostCode": 1
+    "StreetAddress": "as",
+    "City": "sasa",
+    "CountryId": 1,
+    "PostCode": 111
   },
   {
     "ID": 25,
-    "StreetAddress": "bkl",
-    "City": "ni",
-    "CountryId": 12,
-    "PostCode": 1
-  },
-  {
-    "ID": 26,
-    "StreetAddress": "Akacije",
-    "City": "Leskovac",
-    "CountryId": 11000,
-    "PostCode": 1
-  },
-  {
-    "ID": 27,
-    "StreetAddress": null,
-    "City": null,
-    "CountryId": 0,
-    "PostCode": 1
-  },
-  {
-    "ID": 28,
-    "StreetAddress": null,
-    "City": null,
-    "CountryId": 0,
-    "PostCode": 1
-  },
-  {
-    "ID": 29,
-    "StreetAddress": null,
-    "City": null,
-    "CountryId": 0,
-    "PostCode": 1
+    "StreetAddress": "dsadsadsads",
+    "City": "sadsadsad",
+    "CountryId": 1,
+    "PostCode": 123
   }
 ]

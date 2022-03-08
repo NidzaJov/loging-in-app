@@ -10,7 +10,7 @@
   {
     "ID": 2,
     "Name": "Marko",
-    "Email": "jeki@seadc.com",
+    "Email": "marko@seadc.com",
     "Age": 13,
     "RoleId": 0,
     "AddressId": 1
@@ -34,7 +34,7 @@
   {
     "ID": 5,
     "Name": "Zdravko",
-    "Email": "jeki@seadc.com",
+    "Email": "zdravko@seadc.com",
     "Age": 18,
     "RoleId": 0,
     "AddressId": 1
@@ -42,7 +42,7 @@
   {
     "ID": 6,
     "Name": "Slavko",
-    "Email": "jeki@seadc.com",
+    "Email": "slavko@seadc.com",
     "Age": 20,
     "RoleId": 0,
     "AddressId": 1

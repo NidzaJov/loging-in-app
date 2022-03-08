@@ -84,5 +84,31 @@ namespace LogingInApp.Classes
                 AllAddresses = list;
             };
         }
+
+        public bool EditAddress(int id, Address editedAddress)
+        {
+            var list = new List<Address>();
+            if (File.Exists(_path))
+            {
+                string json = File.ReadAllText(_path);
+                list = JsonConvert.DeserializeObject<List<Address>>(json);
+            }
+            try
+            {
+                var index = list.FindIndex(x => x.ID == id);
+                list.RemoveAt(index);
+                list.Insert(index, editedAddress);
+
+                string serializedJson = JsonConvert.SerializeObject(list, Formatting.Indented);
+                File.WriteAllText(_path, serializedJson);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+
+        }
     }
 }

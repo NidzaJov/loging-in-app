@@ -42,6 +42,10 @@ namespace LogingInApp
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.gwEmployees = new System.Windows.Forms.DataGridView();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.gwEmployees)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewStudents
@@ -55,7 +59,7 @@ namespace LogingInApp
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(653, 44);
+            this.btnLogOut.Location = new System.Drawing.Point(1005, 21);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(101, 37);
             this.btnLogOut.TabIndex = 1;
@@ -65,7 +69,7 @@ namespace LogingInApp
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Location = new System.Drawing.Point(653, 353);
+            this.btnSubmit.Location = new System.Drawing.Point(1005, 330);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(101, 23);
             this.btnSubmit.TabIndex = 3;
@@ -77,7 +81,7 @@ namespace LogingInApp
             // 
             this.addressControl1.City = null;
             this.addressControl1.CountryId = 1;
-            this.addressControl1.Location = new System.Drawing.Point(491, 102);
+            this.addressControl1.Location = new System.Drawing.Point(843, 79);
             this.addressControl1.Name = "addressControl1";
             this.addressControl1.PostCode = 0;
             this.addressControl1.Size = new System.Drawing.Size(263, 215);
@@ -148,11 +152,44 @@ namespace LogingInApp
             this.label4.TabIndex = 12;
             this.label4.Text = "Age:";
             // 
+            // gwEmployees
+            // 
+            this.gwEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gwEmployees.Location = new System.Drawing.Point(481, 44);
+            this.gwEmployees.Name = "gwEmployees";
+            this.gwEmployees.RowHeadersWidth = 51;
+            this.gwEmployees.RowTemplate.Height = 24;
+            this.gwEmployees.Size = new System.Drawing.Size(306, 268);
+            this.gwEmployees.TabIndex = 13;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(688, 330);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(99, 23);
+            this.btnSave.TabIndex = 14;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(507, 329);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(82, 23);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1132, 450);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.gwEmployees);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -169,6 +206,7 @@ namespace LogingInApp
             this.Text = "formMain";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMain_OnClosing);
             this.Load += new System.EventHandler(this.formMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gwEmployees)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +226,8 @@ namespace LogingInApp
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView gwEmployees;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

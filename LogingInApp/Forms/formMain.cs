@@ -4,7 +4,9 @@ using LogingInApp.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,11 @@ namespace LogingInApp
         private bool isEdit = false;
         private User editedUser = null;
         private AddressControl _address;
+
+        public static string connectionString = ConfigurationManager.ConnectionStrings["localDb"].ConnectionString;
+        public static SqlConnection connection = new SqlConnection(connectionString);
+        private static SqlDataAdapter _dataAdapter = DataAdapters.EmployeeAdapter(connection);
+        private DataSet employees;
         public formMain()
         {
             InitializeComponent();
@@ -28,11 +35,48 @@ namespace LogingInApp
             User user = new User();
             var userList = user.GetUserList();
             populateList(userList);
+            /*
+            
+            */
+            populateGridView();
+        }
 
-            this.listViewStudents.ColumnClick += new ColumnClickEventHandler(onColumnClick);
-            ColumnClickEventArgs eArgs = new ColumnClickEventArgs(0);
-            onColumnClick(listViewStudents, eArgs);
-            this.listViewStudents.MouseClick += listViewStudents_OnMouseClick;
+        private void populateGridView()
+        {
+            gwEmployees.AutoGenerateColumns = true;
+            gwEmployees.EditMode = DataGridViewEditMode.EditOnEnter;
+
+            employees = new DataSet();
+            try
+            {
+                _dataAdapter.Fill(employees, "Employee");
+                gwEmployees.DataSource = employees.Tables["Employee"];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error during filling of data set", ex.Message);
+            }
+            finally
+            {
+                if (connection.State != ConnectionState.Closed)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void UpdateGridView()
+        {
+            try
+            {
+                _dataAdapter.Update(employees, "Employee");
+                populateGridView();
+                MessageBox.Show("Sucessfull saving");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Aborted saving {ex.Message}");
+            }
         }
 
         private void onColumnClick(object sender, ColumnClickEventArgs e)
@@ -42,8 +86,12 @@ namespace LogingInApp
 
         private void populateList(IList<User> studentList)
         {
-            listViewStudents.View = View.Details;
+            this.listViewStudents.ColumnClick += new ColumnClickEventHandler(onColumnClick);
+            ColumnClickEventArgs eArgs = new ColumnClickEventArgs(0);
+            onColumnClick(listViewStudents, eArgs);
+            this.listViewStudents.MouseClick += listViewStudents_OnMouseClick;
 
+            listViewStudents.View = View.Details;
             listViewStudents.Columns.Add("ID");
             listViewStudents.Columns.Add("Name");
             listViewStudents.Columns.Add("Email");
@@ -57,7 +105,7 @@ namespace LogingInApp
                 listViewStudents.Items.Add(item);
             }
 
-            listViewStudents.Sorting = SortOrder.Descending;
+            listViewStudents.Sorting = System.Windows.Forms.SortOrder.Descending;
             listViewStudents.GridLines = true;
             listViewStudents.FullRowSelect = true;
         }
@@ -83,6 +131,7 @@ namespace LogingInApp
             txtName.Text = "";
             txtEmail.Text = "";
             txtAge.Text = "";
+            txtID.Text = "";
 
             var txtStreetAddress = _address.Controls.Find("txtStreetAddress", true);
             if (txtStreetAddress != null)
@@ -205,6 +254,7 @@ namespace LogingInApp
                     this.populateList(u.GetUserList());
                     editedUser = null;
                     isEdit = false;
+                    clearFields();
                 }
             } else
             {
@@ -237,6 +287,18 @@ namespace LogingInApp
         {
 
         }
-            
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            UpdateGridView();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in gwEmployees.SelectedRows)
+            {
+                gwEmployees.Rows.RemoveAt(row.Index);
+            }
+        }
     }
 }
