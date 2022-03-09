@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LogingInApp.Classes;
+using LogingInApp.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,11 +42,34 @@ namespace LogingInApp
             {
                 if (textUserName.Text != "" && textPassword.Text != "")
                 {
-                    MessageBox.Show("Login Succesfull");
-                    this.Hide();
-                    //check Role
-                    formMain fm = new formMain();
-                    fm.Show();
+                    User user = new User();
+                    User searchedUser = user.GetUserList(textUserName.Text).FirstOrDefault();
+                    if (searchedUser != null)
+                    {
+                        Role role = new Role();
+                        Role usersRole = role.GetRole(searchedUser.RoleId);
+                        if(usersRole != null)
+                        {
+                            switch (usersRole.Name)
+                            {
+                                case "Admin":
+                                    {
+                                        Form fa = new AdminForm();
+                                        this.Hide();
+                                        fa.Show();
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        formMain fm = new formMain();
+                                        fm.Show();
+                                        break;
+                                    }
+                                    break;
+                            }
+                                
+                        }
+                    }
                 } 
                 else
                 {

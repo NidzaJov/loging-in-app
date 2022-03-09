@@ -4,7 +4,7 @@
     "Name": "Darko",
     "Email": "jeki@seadc.com",
     "Age": 13,
-    "RoleId": 0,
+    "RoleId": 2,
     "AddressId": 1
   },
   {
@@ -20,7 +20,7 @@
     "Name": "Janko",
     "Email": "jeki@seadc.com",
     "Age": 21,
-    "RoleId": 0,
+    "RoleId": 1,
     "AddressId": 1
   },
   {
@@ -28,7 +28,7 @@
     "Name": "Zarko",
     "Email": "jeki@seadc.com",
     "Age": 18,
-    "RoleId": 0,
+    "RoleId": 3,
     "AddressId": 1
   },
   {
@@ -36,7 +36,7 @@
     "Name": "Zdravko",
     "Email": "zdravko@seadc.com",
     "Age": 18,
-    "RoleId": 0,
+    "RoleId": 2,
     "AddressId": 1
   },
   {
@@ -68,7 +68,7 @@
     "Name": "Joca",
     "Email": "joca@sedc.com",
     "Age": 0,
-    "RoleId": 0,
+    "RoleId": 1,
     "AddressId": 24
   },
   {
@@ -76,7 +76,7 @@
     "Name": "Moca",
     "Email": "moca@sedc.com",
     "Age": 0,
-    "RoleId": 0,
+    "RoleId": 2,
     "AddressId": 26
   }
 ]

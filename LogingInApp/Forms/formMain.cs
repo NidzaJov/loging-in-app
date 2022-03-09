@@ -186,7 +186,6 @@ namespace LogingInApp
                     DeleteClick(sender, e, listViewStudents.FocusedItem);
                 };
                 m.MenuItems.Add(deleteMenuItem);
-
                 m.Show(listViewStudents, new Point(e.X, e.Y));
             }
         }

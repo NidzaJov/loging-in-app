@@ -116,6 +116,7 @@ namespace LogingInApp.Classes
         {
             if (AllUsers == null) _getAllUsers();
             var user = AllUsers.Where(x => x.ID == userId).FirstOrDefault();
+
             return user;
         }
 

@@ -33,7 +33,6 @@ namespace LogingInApp
             this.listViewStudents = new System.Windows.Forms.ListView();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
-            this.addressControl1 = new LogingInApp.Controls.AddressControl();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -45,6 +44,7 @@ namespace LogingInApp
             this.gwEmployees = new System.Windows.Forms.DataGridView();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.addressControl1 = new LogingInApp.Controls.AddressControl();
             ((System.ComponentModel.ISupportInitialize)(this.gwEmployees)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,17 +76,6 @@ namespace LogingInApp
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
-            // addressControl1
-            // 
-            this.addressControl1.City = null;
-            this.addressControl1.CountryId = 1;
-            this.addressControl1.Location = new System.Drawing.Point(843, 79);
-            this.addressControl1.Name = "addressControl1";
-            this.addressControl1.PostCode = 0;
-            this.addressControl1.Size = new System.Drawing.Size(263, 215);
-            this.addressControl1.StreetAddress = null;
-            this.addressControl1.TabIndex = 4;
             // 
             // txtName
             // 
@@ -181,6 +170,17 @@ namespace LogingInApp
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // addressControl1
+            // 
+            this.addressControl1.City = null;
+            this.addressControl1.CountryId = 1;
+            this.addressControl1.Location = new System.Drawing.Point(843, 79);
+            this.addressControl1.Name = "addressControl1";
+            this.addressControl1.PostCode = 0;
+            this.addressControl1.Size = new System.Drawing.Size(263, 215);
+            this.addressControl1.StreetAddress = null;
+            this.addressControl1.TabIndex = 4;
             // 
             // formMain
             // 
