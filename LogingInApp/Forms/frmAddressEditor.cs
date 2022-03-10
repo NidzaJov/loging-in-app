@@ -39,6 +39,7 @@ namespace LogingInApp.Forms
             User u = new User();
             // save edited address
             var txtStreetAddress = ctlAddress.Controls.Find("txtStreetAddress", true);
+
             if (txtStreetAddress != null)
             {
                 TextBox tb = txtStreetAddress[0] as TextBox;
@@ -46,6 +47,7 @@ namespace LogingInApp.Forms
             }
 
             var txtCity = ctlAddress.Controls.Find("txtCity", true);
+
             if (txtCity != null)
             {
                 TextBox tb = txtCity[0] as TextBox;
@@ -53,12 +55,14 @@ namespace LogingInApp.Forms
             }
 
             var txtPostCode = ctlAddress.Controls.Find("txtPostCode", true);
+
             if (txtPostCode != null)
             {
                 TextBox tb = txtPostCode[0] as TextBox;
                 editedAddress.PostCode = int.Parse(tb.Text);
             }
             var ddlCountry = ctlAddress.Controls.Find("ddlCountry", true);
+
             if ( ddlCountry != null)
             {
                 ComboBox cb = ddlCountry[0] as ComboBox;
@@ -66,12 +70,23 @@ namespace LogingInApp.Forms
             }
             editedAddress.ID = _addressId;
 
-            bool isSuccessfull = a.EditAddress(_addressId, editedAddress);
-
-            if (isSuccessfull)
+            try
             {
-                this.Hide();
+                bool isSuccessfull = a.EditAddress(_addressId, editedAddress);
 
+                if (isSuccessfull)
+                {
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Editing address failed");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
             // or save new address and update user.AddressId
         }

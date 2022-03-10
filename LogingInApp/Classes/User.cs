@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LogingInApp.Classes
 {
@@ -18,8 +20,10 @@ namespace LogingInApp.Classes
         public int AddressId { get; set; }
         [JsonIgnore]
         public IList<User> AllUsers { get; set; }
+        private static string projectDirectoryPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 9);
 
-        private const string _path = @"C:\Users\Nikola\Desktop\loging-in-app\LogingInApp\Data\users.json";
+        private readonly string _path = Path.Combine(projectDirectoryPath, @"Data\users.json");
+
 
         public User()
         {
@@ -45,6 +49,10 @@ namespace LogingInApp.Classes
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<User>>(json);
             }
+             else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
+            }
             try
             {
                 int id = list.Count > 0 ? list.LastOrDefault().ID + 1 : 1;
@@ -68,6 +76,10 @@ namespace LogingInApp.Classes
             {
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
             }
 
             try
@@ -93,6 +105,10 @@ namespace LogingInApp.Classes
             {
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
             }
 
             try

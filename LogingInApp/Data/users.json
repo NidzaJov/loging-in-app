@@ -4,7 +4,7 @@
     "Name": "Darko",
     "Email": "jeki@seadc.com",
     "Age": 13,
-    "RoleId": 2,
+    "RoleId": 1,
     "AddressId": 1
   },
   {
@@ -26,7 +26,7 @@
   {
     "ID": 4,
     "Name": "Zarko",
-    "Email": "jeki@seadc.com",
+    "Email": "zarko@seadc.com",
     "Age": 18,
     "RoleId": 3,
     "AddressId": 1

@@ -18,8 +18,9 @@ namespace LogingInApp.Classes
         [JsonIgnore]
         public IList<Address> AllAddresses { get; set; }
 
-        private const string _path = @"C:\Users\Nikola\Desktop\loging-in-app\LogingInApp\Data\addresses.json";
+        private static string projectDirectoryPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 9);
 
+        private readonly string _path = Path.Combine(projectDirectoryPath, @"Data\addresses.json");
         public Address()
         {
 
@@ -43,7 +44,10 @@ namespace LogingInApp.Classes
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<Address>>(json);
             }
-
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
+            }
             try
             {
                 int id = list.Count > 0 ? list.LastOrDefault().ID + 1 : 1;
@@ -92,6 +96,10 @@ namespace LogingInApp.Classes
             {
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<Address>>(json);
+            }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
             }
             try
             {

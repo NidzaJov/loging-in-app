@@ -15,8 +15,9 @@ namespace LogingInApp.Classes
         [JsonIgnore]
         public List<Role> AllRoles { get; set; }
 
-        private string _path = @"C:\Users\Nikola\Desktop\loging-in-app\LogingInApp\Data\roles.json";
+        private static string projectDirectoryPath = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.Length - 9);
 
+        private readonly string _path = Path.Combine(projectDirectoryPath, @"Data\roles.json");
         public Role()
         {
 
@@ -35,6 +36,10 @@ namespace LogingInApp.Classes
             {
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<Role>>(json);
+            }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
             }
             try
             {
@@ -59,13 +64,16 @@ namespace LogingInApp.Classes
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<Role>>(json);
             }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
+            }
 
             AllRoles =  list;
         }
 
         public Role GetRole(int id)
         {
-            var list = new List<Role>();
             if (AllRoles == null) GetAllRoles();
             Role role = AllRoles.Where(r => r.ID == id).FirstOrDefault();
 
@@ -80,6 +88,10 @@ namespace LogingInApp.Classes
                 string json = File.ReadAllText(_path);
                 list = JsonConvert.DeserializeObject<List<Role>>(json);
             }
+            else
+            {
+                throw new FileNotFoundException($"File on path {_path} does not exist");
+            }
             try
             {
                 var index = list.FindIndex(r => r.ID == id);
@@ -89,6 +101,10 @@ namespace LogingInApp.Classes
                 {
                     string serializedJson = JsonConvert.SerializeObject(list, Formatting.Indented);
                     File.WriteAllText(_path, serializedJson);
+                }
+                else
+                {
+                    throw new FileNotFoundException($"File on path {_path} does not exist");
                 }
 
                 return true;
@@ -109,6 +125,10 @@ namespace LogingInApp.Classes
                 {
                     string serializedJson = JsonConvert.SerializeObject(AllRoles, Formatting.Indented);
                     File.WriteAllText(_path, serializedJson);
+                }
+                else
+                {
+                    throw new FileNotFoundException($"File on path {_path} does not exist");
                 }
 
                 return true;

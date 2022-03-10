@@ -95,6 +95,7 @@ namespace LogingInApp.Forms
                 bool successfull = user.EditUser(editedUser.ID, editedUser);
                 if (successfull)
                 {
+                    this.Refresh();
                     listViewUsers.Items.Clear();
                     user.GetUserList();
                     populateList(user.AllUsers);
